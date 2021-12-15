@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Entity
 public class Userorder implements Cloneable,Serializable,Comparable<Userorder>{
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
-	private int orderid;
+	private int orderId;
 	private Date orderdate;
 	private double totalprice;
 	@ManyToOne()
@@ -35,12 +35,12 @@ public class Userorder implements Cloneable,Serializable,Comparable<Userorder>{
 		return 0;
 	}
 
-	public int getOrder_id() {
-		return orderid;
+	public int getOrderId() {
+		return orderId;
 	}
 
-	public void setOrder_id(int order_id) {
-		this.orderid = order_id;
+	public void setOrderId(int order_id) {
+		this.orderId = order_id;
 	}
 
 	public Date getOrder_date() {
@@ -77,7 +77,7 @@ public class Userorder implements Cloneable,Serializable,Comparable<Userorder>{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(totalprice, userdetails, orderdate, orderid, orderproducts);
+		return Objects.hash(totalprice, userdetails, orderdate, orderId, orderproducts);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class Userorder implements Cloneable,Serializable,Comparable<Userorder>{
 		Userorder other = (Userorder) obj;
 		return Double.doubleToLongBits(totalprice) == Double.doubleToLongBits(other.totalprice)
 				&& Objects.equals(userdetails, other.userdetails) && Objects.equals(orderdate, other.orderdate)
-				&& orderid == other.orderid && Objects.equals(orderproducts, other.orderproducts);
+				&& orderId == other.orderId && Objects.equals(orderproducts, other.orderproducts);
 	}
 	
 	

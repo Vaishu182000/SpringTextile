@@ -63,7 +63,7 @@ public class UserDetails implements Cloneable,Serializable,Comparable<UserDetail
 	public void setConfirmpassword(String confirmpassword) {
 		this.confirmpassword = confirmpassword;
 	}
-	@OneToMany(targetEntity = Userorder.class, mappedBy="orderid",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = Userorder.class, mappedBy="orderId",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<Userorder> orderlist;
 	
 	@OneToMany(targetEntity = Cart.class, mappedBy="cartid",fetch = FetchType.EAGER)

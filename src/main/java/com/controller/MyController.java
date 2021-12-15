@@ -22,8 +22,16 @@ import com.model.UserDetails;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
+import com.service.AdminService;
+import com.service.CartService;
 import com.service.Cartdisplay;
+import com.service.Indorderdisplay;
+import com.service.MessageService;
+import com.service.OrderService;
+import com.service.Orderdisplay;
+import com.service.ProductService;
 import com.service.UserService;
+import com.service.UserServicemain;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -42,12 +50,23 @@ import org.springframework.validation.BindingResult;
 
 @Controller
 public class MyController {
-	@Autowired
-	UserService productsdao;
+	//@Autowired
+	//UserService productsdao;
 	
+	@Autowired
+	AdminService adminservice;
+	@Autowired
+	CartService cartservice;
+	@Autowired
+	MessageService messageservice;
+	@Autowired
+	UserServicemain userservice;
+	@Autowired
+	ProductService productservice;
+	@Autowired
+	OrderService orderservice;
 	@Autowired
 	PaypalService service;
-	
 	LoginSecurityConfigurer config;
 	@Autowired
 	PasswordValidator Validator;
@@ -92,7 +111,7 @@ public class MyController {
 	
 	@RequestMapping(value="/products",method=RequestMethod.GET)
 	public String showProducts(Model model) {
-		List<Products> products = productsdao.getAllProduct();
+		List<Products> products = productservice.getAllProduct();
 		model.addAttribute("products", products);
 		return "Products";
 	}
@@ -102,8 +121,8 @@ public class MyController {
 		int userid=Integer.parseInt(session.getAttribute("userid").toString());
 		System.out.println(productid);
 		System.out.println(quantity);
-		productsdao.addcart(productid,quantity,userid);
-		List<Products> products = productsdao.getAllProduct();
+		cartservice.addcart(productid,quantity,userid);
+		List<Products> products = productservice.getAllProduct();
 		model.addAttribute("products", products);
 		return "Products";
 	}
@@ -111,11 +130,11 @@ public class MyController {
 	@RequestMapping(value="/cart",method=RequestMethod.GET)
 	public String showCart(Model model,HttpSession session) {
 		int userid=Integer.parseInt(session.getAttribute("userid").toString());
-		List<Cartdisplay> p1 = productsdao.displaycart(userid);
-		double total = productsdao.total(userid);
+		List<Cartdisplay> p1 = cartservice.displaycart(userid);
+		double total = cartservice.total(userid);
 		model.addAttribute("total",total);
 		model.addAttribute("cart", p1);
-		List<Address> add = productsdao.check(userid);
+		List<Address> add = userservice.check(userid);
 		System.out.println("Address...."+add);
 		model.addAttribute("address",add);
 		System.out.println(p1);
@@ -126,7 +145,7 @@ public class MyController {
 	@RequestMapping(value = "/image", method=RequestMethod.GET)
 	public String showExampleView(Model model)
 	{
-		List<Products> products = productsdao.getAllProduct();
+		List<Products> products = productservice.getAllProduct();
 		model.addAttribute("products", products);
 		return "cart";
 	}
@@ -142,7 +161,7 @@ public class MyController {
 		    	String name = messagemodel.getName();
 				String email = messagemodel.getEmail();
 				String mesg = messagemodel.getMessage();
-				productsdao.addmessage(name,email,mesg);
+				messageservice.addmessage(name,email,mesg);
 				return "contact";
 		    }
 		
@@ -156,9 +175,9 @@ public class MyController {
 		String address = request.getParameter("address");
 		String district = request.getParameter("district");
 		String state = request.getParameter("state");
-		productsdao.addaddress(name,phone,address,district,state,userid);
+		userservice.addaddress(name,phone,address,district,state,userid);
 		try {
-			Payment payment = service.createPayment((productsdao.total(userid)/100), "USD", "paypal","sale","ethachi",
+			Payment payment = service.createPayment((cartservice.total(userid)/100), "USD", "paypal","sale","ethachi",
 					"http://localhost:8080/addaddress/cancel",
 					"http://localhost:8080/addaddress/success");
 			for(Links link:payment.getLinks()) {
@@ -187,7 +206,7 @@ public class MyController {
 		    	String pass = userdetails.getPassword();
 				String generatedSecuredPasswordHash = BCrypt.hashpw(pass, BCrypt.gensalt(8));
 				System.out.println(name);
-				int success = productsdao.adduser(email,name,generatedSecuredPasswordHash);
+				int success = userservice.adduser(email,name,generatedSecuredPasswordHash);
 				return "login";
 		    }
 	}
@@ -200,7 +219,7 @@ public class MyController {
 	 @PostMapping(value = CANCEL_URL)
 	    public String cancelPay() {
 	        return "cancel";
-	    }
+	 }
 	 @GetMapping(value = SUCCESS_URL)
 	    public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId,HttpSession session) {
 	        try {
@@ -209,14 +228,15 @@ public class MyController {
 	            int userid=Integer.parseInt(session.getAttribute("userid").toString());
 	            System.out.println(payment.toJSON());
 	            if (payment.getState().equals("approved")) {
-	            	productsdao.sendemail(userid,payid);
-	            	productsdao.addorder(userid);
-	                return "cart";
+	            	messageservice.sendemail(userid,payid);
+	            	int orderid = orderservice.addorder(userid);
+	            	orderservice. addorderproduct(userid,orderid);
+	                return "success";
 	            }
 	        } catch (PayPalRESTException e) {
 	         System.out.println(e.getMessage());
 	        }
-	        return "success";
+	        return "cancel";
 	    }
 	    
 	    @GetMapping(value = "/deletecart/{cartid}")
@@ -224,21 +244,114 @@ public class MyController {
 			
 //			cartid = request.getParameter("cartid");
 			int id = Integer.parseInt(cartid);
-			productsdao.deletecart(id);
+			cartservice.deletecart(id);
 			int userid=Integer.parseInt(session.getAttribute("userid").toString());
-			List<Cartdisplay> p1 = productsdao.displaycart(userid);
-			double total = productsdao.total(userid);
+			List<Cartdisplay> p1 = cartservice.displaycart(userid);
+			double total = cartservice.total(userid);
 			model.addAttribute("total",total);
 			model.addAttribute("cart", p1);
 			return "cart";
 		}
 	    
 	    @RequestMapping(value = "/addorder", method=RequestMethod.GET)
-		public ModelAndView order() {
-			productsdao.addorder(1);
+		public ModelAndView order(HttpSession session) {
+	    	int userid=Integer.parseInt(session.getAttribute("userid").toString());
+			orderservice.addorder(userid);
 			System.out.println("This is addorder");
 			ModelAndView model = new ModelAndView();
 			model.setViewName("products");
 			return model;
 		}
+	    
+	    @GetMapping("/adminproducts")
+	    public String insertproducts(Model model)
+	    {
+	    	Products productsmodel = new Products();
+	    	model.addAttribute("productsmodel", productsmodel);
+	    	return "adminproducts";
+	    }
+	    @RequestMapping(value = "/successinsertion",method=RequestMethod.GET)
+	    public String successinsertion(@Valid @ModelAttribute("productsmodel")Products productsmodel, BindingResult bindingresult) throws Exception
+	    {
+	    	if(bindingresult.hasErrors())
+	    	{
+	    		return "adminproducts";
+	    	}
+	    	else
+	    	{
+	    		String productid = productsmodel.getProductid();
+		    	String productname = productsmodel.getProductname();
+		    	double productprice = productsmodel.getPrice();
+		    	int quantityavail = productsmodel.getQuantity_aval();
+		    	String image = productsmodel.getImage();
+		    	adminservice.insertproductsadmin(productid, productname, productprice, quantityavail, image);
+		    	
+		    	return "adminproducts";
+	    	}	
+	    }
+	    @RequestMapping(value="/adminproductsdisplay",method=RequestMethod.GET)
+		public String showProductsadmin(Model model) {
+			List<Products> products = productservice.getAllProduct();
+			model.addAttribute("products", products);
+			return "display1";
+		}
+	    @RequestMapping(value="updateform/{productid}",method=RequestMethod.GET)
+	    public String updateproducts(@PathVariable("productid") String productid, HttpServletRequest request, Model model) throws Exception
+	    {
+	    	//String newproductid = request.getParameter("productid");
+	    	adminservice.delteproductsadmin(productid);
+	    	String productname = request.getParameter("productname");
+	    	String productprice = request.getParameter("price");
+	    	int price = Integer.parseInt(productprice);
+	    	String quantityavail = request.getParameter("quantityavail");
+	    	int quantity = Integer.parseInt(quantityavail);
+	    	String image = request.getParameter("image");
+	    	//productsdao.updateproductsadmin(productid);
+	    	adminservice.insertproductsadmin(productid, productname, price, quantity, image);
+	    	List<Products> products = productservice.getAllProduct();
+			model.addAttribute("products", products);
+	    	return "display1";
+	    }
+	   
+	    @RequestMapping(value="updatedelete/{productid}",method=RequestMethod.GET, params = "delete")
+	    public String deleteproductsadmin(@PathVariable("productid") String productid,Model model)
+	    {
+	    	adminservice.delteproductsadmin(productid);
+	    	List<Products> products = productservice.getAllProduct();
+			model.addAttribute("products", products);
+	    	return "display1";
+	    }
+	   
+	    @RequestMapping(value="updatedelete/{productid}",method=RequestMethod.GET, params = "update")
+	    public String updateproductsadmin(@PathVariable("productid") String productid,Model model)
+	    {
+	    	List<Products> indlist = adminservice.updateproductsadmin(productid);
+	    	System.out.println(indlist.get(0).getProductid());
+	    	model.addAttribute("indlist",indlist);
+	    	//model.addAttribute("productid",productid);
+//	    	List<Products> products = productsdao.getAllProduct();
+//			model.addAttribute("products", products);
+	    	return "updateproducts";
+	    }
+	    
+	    @RequestMapping(value="/orderdisplay",method=RequestMethod.GET)
+	    public String orderdisplay(Model model)
+	    {
+	    	List<Orderdisplay> orderdisplaylist = adminservice.orderdisplay();
+	    	model.addAttribute("orderdisplaylist",orderdisplaylist);
+	    	return "orderdisplay";	
+	    }
+	    @RequestMapping(value="/indorder/{orderid}",method=RequestMethod.GET)
+	    public String indorder(@PathVariable("orderid") int orderid,Model model)
+	    {
+	    	List<Indorderdisplay> indorderdisplay = adminservice.indorder(orderid);
+	    	model.addAttribute("indorderdisplay",indorderdisplay);
+	    	return "indorder";
+	    }
+	    
+	    public void showorder(Model model) {
+	    	List<Orderdisplay> order = adminservice.orderdisplay();
+			model.addAttribute("products", order);
+			
+	    }
 }

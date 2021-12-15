@@ -15,7 +15,7 @@ public class OrderProduct implements Cloneable,Serializable,Comparable<OrderProd
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
 	private int orderproductid;
 	@ManyToOne()
-	private Userorder orderid;
+	private Userorder userorder;
 	private String productid;
 	private int quantity;
 	private double price;
@@ -28,11 +28,12 @@ public class OrderProduct implements Cloneable,Serializable,Comparable<OrderProd
 	public void setOrderproduct_id(int orderproduct_id) {
 		this.orderproductid = orderproduct_id;
 	}
-	public Userorder getOrder_id() {
-		return orderid;
+	
+	public Userorder getUserorder() {
+		return userorder;
 	}
-	public void setOrder_id(Userorder order_id) {
-		this.orderid = order_id;
+	public void setUserorder(Userorder userorder) {
+		this.userorder = userorder;
 	}
 	public String getProduct_id() {
 		return productid;
@@ -60,7 +61,7 @@ public class OrderProduct implements Cloneable,Serializable,Comparable<OrderProd
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(orderid, orderproductid, price, productid, quantity);
+		return Objects.hash(userorder, orderproductid, price, productid, quantity);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -71,12 +72,12 @@ public class OrderProduct implements Cloneable,Serializable,Comparable<OrderProd
 		if (getClass() != obj.getClass())
 			return false;
 		OrderProduct other = (OrderProduct) obj;
-		return orderid == other.orderid && orderproductid == other.orderproductid && price == other.price
+		return userorder == other.userorder && orderproductid == other.orderproductid && price == other.price
 				&& productid == other.productid && quantity == other.quantity;
 	}
 	@Override
 	public String toString() {
-		return "OrderProduct [orderproduct_id=" + orderproductid + ", order_id=" + orderid + ", product_id="
+		return "OrderProduct [orderproduct_id=" + orderproductid + ", order_id=" + userorder + ", product_id="
 				+ productid + ", quantity=" + quantity + ", price=" + price + "]";
 	}
 	

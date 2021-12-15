@@ -4,17 +4,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 @Entity
 public class Products {
 	@Id
 	@Column(length = 64)
+	@NotBlank(message = "Product id should not be blank")
 	private String productid;
+	@NotBlank(message = "Product name should not be blank")
 	private String productname;
+	@NotNull(message = "Quantity available should not be blank")
 	private int quantityavail;
-	private int productcart;
+	@NotNull(message = "Product price should not be blank")
 	private double price;
 	@Lob
 	@Column(columnDefinition = "LONGBLOB")
+	@NotBlank(message = "Please insert an image")
 	private String image;
 	public String getProductid() {
 		return productid;
@@ -50,12 +56,6 @@ public class Products {
 	public String toString() {
 		return "Products [productid=" + productid + ", productname=" + productname + ", quantity_aval=" + quantityavail
 				+ ", price=" + price + ", image=" + image + "]";
-	}
-	public int getProductcart() {
-		return productcart;
-	}
-	public void setProductcart(int productcart) {
-		this.productcart = productcart;
 	}
 	
 }

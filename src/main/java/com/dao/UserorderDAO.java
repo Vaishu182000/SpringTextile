@@ -11,6 +11,6 @@ public interface UserorderDAO  extends JpaRepository<Userorder, Integer>{
 
 //	List<Userorder> findByUserorderOrderid(int i);
 
-	List<Userorder> findByOrderid(int i);	
+	List<Userorder> findByOrderId(int i);	
 
 }

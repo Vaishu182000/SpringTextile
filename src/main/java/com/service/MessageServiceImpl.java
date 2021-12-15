@@ -2,20 +2,13 @@ package com.service;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
-import java.util.Set;
-import java.util.TreeMap;
 
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -25,15 +18,16 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.transaction.Transactional;
 
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.log4j.Logger;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.dao.AddressDAO;
 import com.dao.CartDAO;
@@ -47,29 +41,23 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Font.FontFamily;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.model.Address;
 import com.model.Cart;
+import com.model.Message;
+import com.model.OrderProduct;
 import com.model.Products;
 import com.model.UserDetails;
 import com.model.Userorder;
 import com.twilio.Twilio;
-import com.model.Message;
-import com.model.OrderProduct;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.log4j.Logger;
-@Component("us")
-@Transactional
-public class UserService{
+@Service
+public class MessageServiceImpl implements MessageService{
+
 	@Autowired
 	private ProductsDAO userDAO;
 	@Autowired
@@ -133,70 +121,7 @@ public class UserService{
 	public void setOrderDAO(OrderDAO orderDAO) {
 		this.orderDAO = orderDAO;
 	}
-	public void service() throws Exception {
-		Products user=new Products();
-		user.setProductid("D1100");
-		user.setPrice(1100);
-		user.setProductname("Shirt");
-		user.setQuantity_aval(15);
-		File file;
-		byte[] bFile;
-		FileInputStream fileInputStream;
-		file = new File("C:\\Users\\VC\\Documents\\workspace-spring-tool-suite-4-4.12.1.RELEASE\\springtextile\\img\\c4.jpg");
-		fileInputStream= new FileInputStream(file);
-		bFile = new byte[(int) file.length()];
-		fileInputStream.read(bFile);
-		String encodstring = org.apache.commons.codec.binary.Base64.encodeBase64String(bFile);
-		System.out.println(encodstring);
-		user.setImage(encodstring);
-		userDAO.save(user);
-		
-		user.setProductid("D1200");
-		user.setPrice(1500);
-		user.setProductname("Shirt");
-		user.setQuantity_aval(15);
-		file = new File("C:\\Users\\VC\\Documents\\workspace-spring-tool-suite-4-4.12.1.RELEASE\\springtextile\\img\\c5.jpg");
-		fileInputStream= new FileInputStream(file);
-		bFile = new byte[(int) file.length()];
-		fileInputStream.read(bFile);
-		encodstring = org.apache.commons.codec.binary.Base64.encodeBase64String(bFile);
-		System.out.println(encodstring);
-		user.setImage(encodstring);
-		userDAO.save(user);
-	}
-	public List<Products> getAllProduct()
-	{
-		return userDAO.findAll();	
-	}
-
-	public void addcart(String productid , int quantity, int userid)
-	{
-		UserDetails u = userdetailsDAO.getById(userid);
-		Cart cart =new Cart();
-		cart.setProduct_id(productid);
-		cart.setQuantity(quantity);
-		cart.setAuth(u);
-		String s="C".concat(productid);
-		cart.setCartDetails(s);
-		cartDAO.save(cart);
-	}
 	
-	public double total(int userid) {
-		double total=0;
-		List<Cart> p = cartDAO.findByUserdetailsUserId(userid);
-		
-		for(int i = 0; i < p.size(); i++)
-		{
-			String s = p.get(i).getProduct_id();
-			System.out.println(s);
-			List<Products> pro = userDAO.findByproductid(s);
-			for(int j=0;j<pro.size();j++) {
-				System.out.println("product"+pro.get(j).getPrice());
-				total= total + (pro.get(j).getPrice()*p.get(i).getQuantity());
-			}
-		}
-		return total;
-	}
 	
 	public void addmessage(String name ,  String email , String message) {
 		Message m =  new Message();
@@ -206,181 +131,7 @@ public class UserService{
 
 		messageDAO.save(m);
 	}
-
-//	public void addorder(int userid)
-//	{
-//		double total=0;
-//		List<Cart> p = cartDAO.findByUserdetailsUserId(userid);
-//		for(int i = 0; i < p.size(); i++)
-//		{
-//			String s = p.get(i).getProduct_id();
-//			System.out.println(s);
-//			List<Products> pro = userDAO.findByproductid(s);
-//			for(int j=0;j<pro.size();j++) {
-//				System.out.println("product"+pro.get(j).getPrice());
-//				total= total + (pro.get(j).getPrice()*p.get(i).getQuantity());
-//			}
-//		}
-//		Userorder order = new Userorder();
-//		order.setTotal_price(total);
-//		java.sql.Date sqlDate = new java.sql.Date(new java.util.Date().getTime());
-//		order.setOrder_date(sqlDate);
-//		UserDetails u = userdetailsDAO.getById(userid);
-//		order.setAuth(u);
-//		System.out.println(order);
-//		System.out.println(order.getOrderId());
-//		userorderDAO.save(order);
-//		// OrderProduct
-//		int orderid = order.getOrderId();
-//		List<Cart> cartlist = cartDAO.findByUserdetailsUserId(userid);
-//		for(int i=0;i<cartlist.size();i++)
-//		{
-//			OrderProduct op = new OrderProduct();
-//			int quantity =cartlist.get(i).getQuantity();
-//			String productid =cartlist.get(i).getProduct_id();
-//			List<Products> pro = userDAO.findByproductid(productid);
-//			for(int j=0;j<pro.size();j++) {
-//				int quantityavail = pro.get(j).getQuantity_aval();
-//				double price = pro.get(j).getPrice();
-//				int updatequantityavail = quantityavail - quantity;
-//				userDAO.updatequantityavailable(updatequantityavail, productid);
-//				Userorder uo = userorderDAO.getById(orderid);
-//				op.setUserorder(uo);
-//				op.setPrice(price);
-//				op.setQuantity(quantity);
-//				op.setProduct_id(productid);
-//			}
-//			orderproductDAO.save(op);
-//		}
-//		cartDAO.deleteByUserdetails_UserId(userid);
-//	}
-	public int addorder(int userid)
-	{
-		double total=0;
-		List<Cart> p = cartDAO.findByUserdetailsUserId(userid);
-		for(int i = 0; i < p.size(); i++)
-		{
-			String s = p.get(i).getProduct_id();
-			System.out.println(s);
-			List<Products> pro = userDAO.findByproductid(s);
-			for(int j=0;j<pro.size();j++) {
-				System.out.println("product"+pro.get(j).getPrice());
-				total= total + (pro.get(j).getPrice()*p.get(i).getQuantity());
-			}
-		}
-		Userorder order = new Userorder();
-		order.setTotal_price(total);
-		java.sql.Date sqlDate = new java.sql.Date(new java.util.Date().getTime());
-		order.setOrder_date(sqlDate);
-		UserDetails u = userdetailsDAO.getById(userid);
-		order.setAuth(u);
-//		int orderid = order.getOrder_id();
-		System.out.println("Before saving");
-		userorderDAO.save(order);
-		System.out.println("After saving");
-		// OrderProduct
-		int orderid = order.getOrderId();
-		return orderid;
-//		addorderproduct(userid, orderid);
-	}
-		
-	public void addorderproduct(int userid, int orderid) {
-		List<Cart> cartlist = cartDAO.findByUserdetailsUserId(userid);
-
-		List<OrderProduct> orders= new ArrayList<>();
-		for(int i=0;i<cartlist.size();i++)
-		{
-			
-			System.out.println("inside orderproduct");
-			OrderProduct op = new OrderProduct();
-			int quantity =cartlist.get(i).getQuantity();
-			String productid =cartlist.get(i).getProduct_id();
-			List<Products> pro = userDAO.findByproductid(productid);
-			for(int j=0;j<pro.size();j++) {
-				int quantityavail = pro.get(j).getQuantity_aval();
-				int updatequantityavail = quantityavail - quantity;
-				userDAO.updatequantityavailable(updatequantityavail, productid);
-				double price = pro.get(j).getPrice();
-				op.setPrice(price);
-			}
-			Userorder uo = userorderDAO.getById(orderid);
-			op.setUserorder(uo);
-			op.setQuantity(quantity);
-			op.setProduct_id(productid);
-			orders.add(op);
-			
-		}
-		orderproductDAO.saveAll(orders);
-		cartDAO.deleteByUserdetails_UserId(userid);
-	}
-public List<Cartdisplay> displaycart(int userid) {
-		
-		List<Cart> cartlist = cartDAO.findByUserdetailsUserId(userid);
-		List<Cartdisplay> pro = new ArrayList<Cartdisplay>();
-
-		for(int i = 0; i < cartlist.size(); i++) {
-
-			String proid = cartlist.get(i).getProduct_id();
-			//getting the product details
-			List<Products> p1 = userDAO.findByproductid(proid);
-			
-			Cartdisplay c1 = new Cartdisplay();
-			for(int j=0;j<p1.size();j++) {
-				c1.setImage(p1.get(j).getImage());
-				c1.setProductname(p1.get(j).getProductname());
-				c1.setPrice(p1.get(j).getPrice());
-			}
-			c1.setCartid(cartlist.get(i).getCart_id());
-			c1.setQuantity(cartlist.get(i).getQuantity());
-			System.out.println(c1.getCartid());
-			pro.add(c1);
-		}
-		System.out.println(pro);
-		return pro;
-
-	}	
 	
-	public int adduser(String email,String username,String password)
-	{
-		UserDetails ud = new UserDetails();
-		ud.setUsername(username);
-		ud.setPassword(password);
-		ud.setEmail(email);
-		UserDetails u = userdetailsDAO.findUserByEmail(email);
-		if(u == null) {
-		ud = userdetailsDAO.save(ud);
-		System.out.println("success");
-		return 1;
-		}
-		else {
-			System.out.println("signup failure");
-			return 0;
-		}
-	}
-	
-	public void addaddress(String name ,String phonenumber,  String address , String district, String state, int userid ) {
-		
-		Address a =  new Address();
-		addressdao.deleteAll();
-		a.setName(name);
-		a.setAddress(address);
-		a.setDistrict(district);
-		a.setState(state);
-		a.setPhonenumber(phonenumber);
-		
-		UserDetails u = userdetailsDAO.getById(userid);
-		a.setUserdetails(u);
-		addressdao.save(a);
-	}
-	public List<Address> check(int userid)
-	{
-		List<Address> add = addressdao.findByUserdetailsUserId(userid);
-		return add;
-	}
-	public void deletecart(int cartid) {
-		cartDAO.deleteById(cartid);
-	}
-
 	public void sendemail(int userid,String payid)
 	{
 		Optional<UserDetails> u = userdetailsDAO.findById(userid);
@@ -643,95 +394,5 @@ public List<Cartdisplay> displaycart(int userid) {
             "Your Order has Successfully Reached Us!!!!....Thank You For Visiting Us")
         .create();
 }
-	public void insertproductsadmin(String productid, String productname, double productprice, int quantityavail, String image) throws Exception
-	{
-		Products products=new Products();
-		products.setProductid(productid);
-		products.setProductname(productname);
-		products.setPrice(productprice);
-		products.setQuantity_aval(quantityavail);
-		byte[] bFile;
-		FileInputStream fileInputStream;
-		File file = new File("C:\\Users\\VC\\Documents\\workspace-spring-tool-suite-4-4.12.1.RELEASE\\springtextile\\img\\"+image);
-		fileInputStream= new FileInputStream(file);
-		bFile = new byte[(int) file.length()];
-		fileInputStream.read(bFile);
-		String encodstring = org.apache.commons.codec.binary.Base64.encodeBase64String(bFile);
-		products.setImage(encodstring);
-		userDAO.save(products);	
-	}
-	public void delteproductsadmin(String productid)
-	{
-		userDAO.deleteById(productid);
-	}
-	public List<Products> updateproductsadmin(String productid)
-	{
-		List<Products> productslist = userDAO.findByproductid(productid);
-		//for(int i=0;i<indproduct.)
-		return productslist;	
-	}
-	public List<Userorder> userorder()
-	{
-		List<Userorder> userorderlist = userorderDAO.findAll();
-		return userorderlist;
-	}
 	
-	public List<Orderdisplay> orderdisplay(){
-		List<Userorder> userorder = userorderDAO.findAll();
-		List<Orderdisplay> orders = new ArrayList<>();
-		for(int i=0;i<userorder.size();i++) {
-			Orderdisplay od = new Orderdisplay();
-			od.setDate(userorder.get(i).getOrder_date());
-			od.setAmount(userorder.get(i).getTotal_price());
-			od.setOrderid(userorder.get(i).getOrderId());
-			
-			UserDetails user = userorder.get(i).getAuth();
-			int uid = user.getUser_id();
-			
-			od.setName(user.getUsername());
-			
-			List<Address> add = addressdao.findByUserdetailsUserId(uid);
-			
-			for(int j=0;j<add.size();j++) {
-			od.setDistrict(add.get(j).getDistrict());
-			od.setPhoneno(add.get(j).getPhonenumber());
-			}
-			
-			orders.add(od);
-			
-			
-		}
-		
-		for(int j=0;j<orders.size();j++) {
-			System.out.println(orders.get(j).getOrderid());
-		}
-		return orders;
-		
-	}
-	
-	public List<Indorderdisplay> indorder(int orderid)
-	{
-		List<OrderProduct> orderproductlist = orderproductDAO.findByUserorderOrderId(orderid);
-		List<Indorderdisplay> indorderdisplay = new ArrayList<>();
-		for(int i=0;i<orderproductlist.size();i++)
-		{
-			Indorderdisplay indorderd = new Indorderdisplay();
-			String productid = orderproductlist.get(i).getProduct_id();
-			System.out.println(productid);
-			indorderd.setProductid(productid);
-			indorderd.setPrice(orderproductlist.get(i).getPrice());
-			indorderd.setQuantity(orderproductlist.get(i).getQuantity());
-			List<Products> productslist = userDAO.findByproductid(productid);
-			for(int j=0;j<productslist.size();j++)
-			{
-				indorderd.setProductname(productslist.get(j).getProductname());
-				System.out.println(productslist.get(j).getProductname());
-				indorderd.setImage(productslist.get(j).getImage());
-				
-			}
-			indorderdisplay.add(indorderd);
-		}
-		//System.out.println("ind"+indorderdisplay);
-		return indorderdisplay;
-	}
 }
