@@ -8,7 +8,7 @@ public class Cartdisplay {
 	private String productname;
 	private String image;
 	private int quantity;
-	private Double price;
+	private int price;
 	
 	@Override
 	public int hashCode() {
@@ -55,10 +55,10 @@ public class Cartdisplay {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public Double getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(Double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}	
 }

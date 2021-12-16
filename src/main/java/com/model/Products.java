@@ -17,7 +17,7 @@ public class Products {
 	@NotNull(message = "Quantity available should not be blank")
 	private int quantityavail;
 	@NotNull(message = "Product price should not be blank")
-	private double price;
+	private int price;
 	@Lob
 	@Column(columnDefinition = "LONGBLOB")
 	@NotBlank(message = "Please insert an image")
@@ -40,10 +40,10 @@ public class Products {
 	public void setQuantity_aval(int quantity_aval) {
 		this.quantityavail = quantity_aval;
 	}
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public String getImage() {

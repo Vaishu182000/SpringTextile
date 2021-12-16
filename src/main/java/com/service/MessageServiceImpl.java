@@ -29,14 +29,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dao.AddressDAO;
-import com.dao.CartDAO;
-import com.dao.MessageDAO;
-import com.dao.OrderDAO;
-import com.dao.OrderproductDAO;
-import com.dao.ProductsDAO;
-import com.dao.UserDetailsDAO;
-import com.dao.UserorderDAO;
+import com.dao.AddressRepository;
+import com.dao.CartRepository;
+import com.dao.MessageRespository;
+import com.dao.OrderRespository;
+import com.dao.OrderproductRepository;
+import com.dao.ProductsRepository;
+import com.dao.UserDetailsRepository;
+import com.dao.UserorderRepository;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -59,66 +59,66 @@ import com.twilio.Twilio;
 public class MessageServiceImpl implements MessageService{
 
 	@Autowired
-	private ProductsDAO userDAO;
+	private ProductsRepository userDAO;
 	@Autowired
-	private CartDAO cartDAO;
+	private CartRepository cartDAO;
 	@Autowired
-	private MessageDAO messageDAO;
+	private MessageRespository messageDAO;
 	@Autowired
-	private OrderDAO orderDAO;
+	private OrderRespository orderDAO;
 	@Autowired
-	private UserorderDAO userorderDAO;
+	private UserorderRepository userorderDAO;
 	@Autowired
-	private OrderproductDAO orderproductDAO;
+	private OrderproductRepository orderproductDAO;
 	@Autowired
-	private UserDetailsDAO userdetailsDAO;
+	private UserDetailsRepository userdetailsDAO;
 	@Autowired
-	private AddressDAO addressdao;
+	private AddressRepository addressdao;
 	public static final String ACCOUNT_SID = "";
     public static final String AUTH_TOKEN = "";
 
     public static Logger logger=Logger.getLogger(UserService.class.getName());
 
-	public UserDetailsDAO getUserdetailsDAO() {
+	public UserDetailsRepository getUserdetailsDAO() {
 		return userdetailsDAO;
 	}
-	public void setUserdetailsDAO(UserDetailsDAO userdetailsDAO) {
+	public void setUserdetailsDAO(UserDetailsRepository userdetailsDAO) {
 		this.userdetailsDAO = userdetailsDAO;
 	}
-	public OrderproductDAO getOrderproductDAO() {
+	public OrderproductRepository getOrderproductDAO() {
 		return orderproductDAO;
 	}
-	public void setOrderproductDAO(OrderproductDAO orderproductDAO) {
+	public void setOrderproductDAO(OrderproductRepository orderproductDAO) {
 		this.orderproductDAO = orderproductDAO;
 	}
-	public UserorderDAO getUserorderDAO() {
+	public UserorderRepository getUserorderDAO() {
 		return userorderDAO;
 	}
-	public void setUserorderDAO(UserorderDAO userorderDAO) {
+	public void setUserorderDAO(UserorderRepository userorderDAO) {
 		this.userorderDAO = userorderDAO;
 	}
-	public ProductsDAO getUserDAO() {
+	public ProductsRepository getUserDAO() {
 		return userDAO;
 	}
-	public CartDAO getCartDAO() {
+	public CartRepository getCartDAO() {
 		return cartDAO;
 	}
-	public void setCartDAO(CartDAO cartDAO) {
+	public void setCartDAO(CartRepository cartDAO) {
 		this.cartDAO = cartDAO;
 	}
-	public void setUserDAO(ProductsDAO userDAO) {
+	public void setUserDAO(ProductsRepository userDAO) {
 		this.userDAO = userDAO;
 	}
-	public MessageDAO getMessageDAO() {
+	public MessageRespository getMessageDAO() {
 		return messageDAO;
 	}
-	public void setMessageDAO(MessageDAO messageDAO) {
+	public void setMessageDAO(MessageRespository messageDAO) {
 		this.messageDAO = messageDAO;
 	}
-	public OrderDAO getOrderDAO() {
+	public OrderRespository getOrderDAO() {
 		return orderDAO;
 	}
-	public void setOrderDAO(OrderDAO orderDAO) {
+	public void setOrderDAO(OrderRespository orderDAO) {
 		this.orderDAO = orderDAO;
 	}
 	

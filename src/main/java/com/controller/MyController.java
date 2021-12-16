@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.LoginSecurityConfigurer;
-import com.dao.ProductsDAO;
+import com.dao.ProductsRepository;
 import com.model.Address;
 import com.model.Cart;
 import com.model.Products;
@@ -280,7 +280,7 @@ public class MyController {
 	    	{
 	    		String productid = productsmodel.getProductid();
 		    	String productname = productsmodel.getProductname();
-		    	double productprice = productsmodel.getPrice();
+		    	int productprice = productsmodel.getPrice();
 		    	int quantityavail = productsmodel.getQuantity_aval();
 		    	String image = productsmodel.getImage();
 		    	adminservice.insertproductsadmin(productid, productname, productprice, quantityavail, image);

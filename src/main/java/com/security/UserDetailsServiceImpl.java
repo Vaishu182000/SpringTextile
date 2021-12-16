@@ -12,12 +12,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dao.UserDetailsDAO;
-import com.dao.UserDetailsDAO;
+import com.dao.UserDetailsRepository;
+import com.dao.UserDetailsRepository;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
-	private UserDetailsDAO userDetailsDAO;
+	private UserDetailsRepository userDetailsDAO;
 	@Autowired
 	HttpSession session;
 	@Override

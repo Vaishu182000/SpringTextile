@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.dao.UserDetailsDAO;
+import com.dao.UserDetailsRepository;
 import com.model.UserDetails;
 import com.service.UserService;
 @Component
@@ -15,7 +15,7 @@ public class PasswordValidator implements Validator {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	UserDetailsDAO userdetailsdao;
+	UserDetailsRepository userdetailsdao;
 	
 	@Override
 	public boolean supports(Class<?> clazz) {

@@ -11,7 +11,7 @@ import com.model.Userorder;
 @Component
 @Transactional
 public interface AdminService {
-	public void insertproductsadmin(String productid, String productname, double productprice, int quantityavail, String image) throws Exception;
+	public void insertproductsadmin(String productid, String productname, int productprice, int quantityavail, String image) throws Exception;
 	public void delteproductsadmin(String productid);
 	public List<Products> updateproductsadmin(String productid);
 	public List<Userorder> userorder();
