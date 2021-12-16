@@ -103,25 +103,25 @@ public class AdminServiceImpl implements AdminService{
 		products.setImage(encodstring);
 		userDAO.save(products);	
 	}
-	//admin 15
+	
 	public void delteproductsadmin(String productid)
 	{
 		userDAO.deleteById(productid);
 	}
-	//admin 16
+	
 	public List<Products> updateproductsadmin(String productid)
 	{
 		List<Products> productslist = userDAO.findByproductid(productid);
 		//for(int i=0;i<indproduct.)
 		return productslist;	
 	}
-	//admin 17
+	
 	public List<Userorder> userorder()
 	{
 		List<Userorder> userorderlist = userorderDAO.findAll();
 		return userorderlist;
 	}
-	//admin 18
+	
 	public List<Orderdisplay> orderdisplay(){
 		List<Userorder> userorder = userorderDAO.findAll();
 		List<Orderdisplay> orders = new ArrayList<>();
@@ -176,7 +176,6 @@ public class AdminServiceImpl implements AdminService{
 			}
 			indorderdisplay.add(indorderd);
 		}
-		//System.out.println("ind"+indorderdisplay);
 		return indorderdisplay;
 	}
 }

@@ -74,8 +74,8 @@ public class MessageServiceImpl implements MessageService{
 	private UserDetailsDAO userdetailsDAO;
 	@Autowired
 	private AddressDAO addressdao;
-	public static final String ACCOUNT_SID = "AC11d197ac69644750a7f62d4ae067750a";
-    public static final String AUTH_TOKEN = "5114a2cd0076509fd3473364f7e80435";
+	public static final String ACCOUNT_SID = "";
+    public static final String AUTH_TOKEN = "";
 
     public static Logger logger=Logger.getLogger(UserService.class.getName());
 
@@ -138,8 +138,8 @@ public class MessageServiceImpl implements MessageService{
 		List<Cart> cartlist = cartDAO.findByUserdetailsUserId(userid);
 		System.out.println(u);
 		String recipient = u.get().getEmail();	
-		String sender = "priyadharsinimv.18it@kongu.edu";
-		String password = "eighthstandard";
+		String sender = "";
+		String password = "";
 		String host = "smtp.gmail.com";
 		Properties properties = System.getProperties();
 		Session session;
@@ -270,9 +270,9 @@ public class MessageServiceImpl implements MessageService{
             mex.printStackTrace();
         }
         //excel
-        String recipient1 = "priyadhars192001@gmail.com";
-		String sender1 = "priyadharsinimv.18it@kongu.edu";
-		String password1 = "eighthstandard";
+        String recipient1 = "";
+		String sender1 = "";
+		String password1 = "";
         session = Session.getInstance(properties, new javax.mail.Authenticator()
         {
             protected javax.mail.PasswordAuthentication getPasswordAuthentication()
@@ -389,8 +389,8 @@ public class MessageServiceImpl implements MessageService{
 	//SMS
     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     com.twilio.rest.api.v2010.account.Message message = com.twilio.rest.api.v2010.account.Message.creator(
-            new com.twilio.type.PhoneNumber("+919790559866"),
-            new com.twilio.type.PhoneNumber("+12056563232"),
+            new com.twilio.type.PhoneNumber(""),
+            new com.twilio.type.PhoneNumber(""),
             "Your Order has Successfully Reached Us!!!!....Thank You For Visiting Us")
         .create();
 }

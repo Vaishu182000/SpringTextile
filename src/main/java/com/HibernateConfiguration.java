@@ -35,15 +35,7 @@ public class HibernateConfiguration {
 		dataSource.setUrl(environment.getProperty("spring.datasource.url"));
 		return dataSource;
 	}
-	
-//	@Bean
-//	@Autowired
-//	public HibernateTransactionManager getTransactionManager(SessionFactory s) {
-//		HibernateTransactionManager txManager=new HibernateTransactionManager();
-//		txManager.setSessionFactory(s);
-//		return txManager;
-//	}
-	
+
 	@Bean(name="entityManagerFactory")
 	public LocalSessionFactoryBean getSessionFactory() {
 		LocalSessionFactoryBean sessionFactory =new LocalSessionFactoryBean();
@@ -57,7 +49,6 @@ public class HibernateConfiguration {
 		Properties prop=new Properties();
 		prop.put("hibernate.dialect", environment.getProperty("spring.jpa.properties.hibernate.dialect"));
 		prop.put("hibernate.show_sql", environment.getProperty("spring.jpa.show-sql"));
-		//prop.put("hibernate.format_sql", environment.getProperty("hibernate.format_sql"));
 		prop.put("hibernate.connection.username", environment.getProperty("spring.datasource.username"));
 		prop.put("hibernate.connection.password", environment.getProperty("spring.datasource.password"));
 		prop.put("hibernate.hbm2ddl.auto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));

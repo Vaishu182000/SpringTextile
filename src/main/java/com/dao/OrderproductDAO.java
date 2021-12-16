@@ -11,8 +11,5 @@ import com.model.Userorder;
 @Repository()
 public interface OrderproductDAO extends JpaRepository<OrderProduct, Integer> {
 
-	List<OrderProduct> findByUserorderOrderId(int orderid);
-
-
-	
+	List<OrderProduct> findByUserorderOrderId(int orderid);	
 }

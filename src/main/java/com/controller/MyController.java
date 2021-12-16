@@ -1,6 +1,7 @@
 package com.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,9 +52,6 @@ import org.springframework.validation.BindingResult;
 
 @Controller
 public class MyController {
-	//@Autowired
-	//UserService productsdao;
-	
 	@Autowired
 	AdminService adminservice;
 	@Autowired
@@ -328,9 +327,6 @@ public class MyController {
 	    	List<Products> indlist = adminservice.updateproductsadmin(productid);
 	    	System.out.println(indlist.get(0).getProductid());
 	    	model.addAttribute("indlist",indlist);
-	    	//model.addAttribute("productid",productid);
-//	    	List<Products> products = productsdao.getAllProduct();
-//			model.addAttribute("products", products);
 	    	return "updateproducts";
 	    }
 	    
@@ -353,5 +349,19 @@ public class MyController {
 	    	List<Orderdisplay> order = adminservice.orderdisplay();
 			model.addAttribute("products", order);
 			
+	    }
+	    
+	    @RequestMapping(value="/error",method=RequestMethod.POST)    
+	    public String handleError(HttpServletRequest request, Model model) {        
+	    	Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+	    	if (status != null) {            
+	    		Integer statusCode = Integer.valueOf(status.toString());
+            if (statusCode == HttpStatus.FORBIDDEN.value()) {
+            	model.addAttribute("title", "You are not allowed to access this page");    
+                return "403";            
+            }
+	    	}
+        model.addAttribute("title", "Unknown error");
+        return "error";
 	    }
 }

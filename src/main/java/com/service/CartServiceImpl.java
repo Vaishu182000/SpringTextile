@@ -117,7 +117,6 @@ public List<Cartdisplay> displaycart(int userid) {
 		for(int i = 0; i < cartlist.size(); i++) {
 
 			String proid = cartlist.get(i).getProduct_id();
-			//getting the product details
 			List<Products> p1 = userDAO.findByproductid(proid);
 			
 			Cartdisplay c1 = new Cartdisplay();

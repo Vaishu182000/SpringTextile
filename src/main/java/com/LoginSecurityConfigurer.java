@@ -51,12 +51,7 @@ public class LoginSecurityConfigurer extends WebSecurityConfigurerAdapter{
 		 .usernameParameter("email")
 		 .passwordParameter("password")
 		 .defaultSuccessUrl("/products")
-		 //.failureUrl("/login")
 		 .and()
-//         .logout()
-//    	 .invalidateHttpSession(true)
-//	    .clearAuthentication(true)
-//	    .logoutUrl("/logout").logoutSuccessUrl("/home").permitAll();
 		 .logout().invalidateHttpSession(true)
 		    .clearAuthentication(true)
 		    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

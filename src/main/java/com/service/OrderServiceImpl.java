@@ -78,11 +78,7 @@ public class OrderServiceImpl implements OrderService {
 	private UserDetailsDAO userdetailsDAO;
 	@Autowired
 	private AddressDAO addressdao;
-	public static final String ACCOUNT_SID = "AC11d197ac69644750a7f62d4ae067750a";
-	public static final String AUTH_TOKEN = "5114a2cd0076509fd3473364f7e80435";
-
-
-
+	
 	public UserDetailsDAO getUserdetailsDAO() {
 		return userdetailsDAO;
 	}
@@ -175,13 +171,10 @@ public class OrderServiceImpl implements OrderService {
 		order.setOrder_date(sqlDate);
 		UserDetails u = userdetailsDAO.getById(userid);
 		order.setAuth(u);
-//		int orderid = order.getOrder_id();
 		System.out.println("Before saving");
 		userorderDAO.save(order);
 		System.out.println("After saving");
-		// OrderProduct
 		int orderid = order.getOrderId();
 		return orderid;
-//		addorderproduct(userid, orderid);
 	}
 }

@@ -13,13 +13,6 @@ import com.model.Products;
 public interface CartDAO extends JpaRepository<Cart, Integer> {
 
 	public List<Cart> findByUserdetailsUserId(int userid);
-
-//	@Modifying
-//	@Query("DELETE FROM cart WHERE name = :name")
 	public void deleteByUserdetails_UserId(int userid);
-
 	public void deleteById(int userid);
-
-	//public List<Cart> findbyId(int userid);
-	
 }

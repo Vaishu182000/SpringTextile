@@ -9,12 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.model.Products;
 @Repository()
-public interface ProductsDAO extends JpaRepository<Products, String>{
-
-//	@Query("SELECT u FROM product u WHERE u.productid = ?1")
-//	Products getByName(String productid);
-	
-	
+public interface ProductsDAO extends JpaRepository<Products, String>{	
 	public List<Products> findByproductid(String uname);
 	@Modifying(clearAutomatically = true)
 	@Query("update Products p set p.quantityavail = :quantityavail where p.productid = :productid")
