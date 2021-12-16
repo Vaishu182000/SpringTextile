@@ -77,7 +77,7 @@ public class MessageServiceImpl implements MessageService{
 	public static final String ACCOUNT_SID = "";
     public static final String AUTH_TOKEN = "";
 
-    public static Logger logger=Logger.getLogger(UserService.class.getName());
+    public static Logger logger=Logger.getLogger(MessageService.class.getName());
 
 	public UserDetailsRepository getUserdetailsDAO() {
 		return userdetailsDAO;
@@ -230,7 +230,7 @@ public class MessageServiceImpl implements MessageService{
 				{
 					String productid = cart.get(i).getProduct_id();
 					Optional<Products> pr = userDAO.findById(productid);
-					double price = pr.get().getPrice();
+					int price = pr.get().getPrice();
 					int quantity = cart.get(i).getQuantity();
 					double total = price * quantity;
 					String productname = pr.get().getProductname();
@@ -271,8 +271,8 @@ public class MessageServiceImpl implements MessageService{
         }
         //excel
         String recipient1 = "";
-		String sender1 = "";
-		String password1 = "";
+        String sender1 = "";
+        String password1 = "";
         session = Session.getInstance(properties, new javax.mail.Authenticator()
         {
             protected javax.mail.PasswordAuthentication getPasswordAuthentication()

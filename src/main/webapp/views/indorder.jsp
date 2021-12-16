@@ -34,23 +34,3 @@
                 </c:forEach>
             </div>
         </div>
-        <!--<table width: 100%; text-align:center>
-            <tr>
-                <th>ProductId</th>
-                <th>Price</th>
-                <th>Product Name</th>
-                <th>Quantity</th>
-                <th>Image</th>
-            </tr>
-            <tbody>
-                <c:forEach items="${indorderdisplay}" var="indorderdisplay">
-                <tr>
-                        <td><c:out value="${indorderdisplay.productid}"/></td>
-                        <td><c:out value="${indorderdisplay.price}"/></td>
-                        <td><c:out value="${indorderdisplay.productname}"/></td>
-                        <td><c:out value="${indorderdisplay.quantity}"/></td>
-                        <td><img src="data:image/jpg;base64,${indorderdisplay.image}" width=220px; height=220px/></td>
-                </tr>  
-                </c:forEach>
-                </tbody>
-        </table>-->

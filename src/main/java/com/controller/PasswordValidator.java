@@ -8,12 +8,9 @@ import org.springframework.validation.Validator;
 
 import com.dao.UserDetailsRepository;
 import com.model.UserDetails;
-import com.service.UserService;
+
 @Component
 public class PasswordValidator implements Validator {
-	
-	@Autowired
-	private UserService userService;
 	@Autowired
 	UserDetailsRepository userdetailsdao;
 	

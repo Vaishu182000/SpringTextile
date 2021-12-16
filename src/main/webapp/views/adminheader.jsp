@@ -17,7 +17,7 @@
                             <li><a href="/adminproductsdisplay"><i class="fa fa-product-hunt" aria-hidden="true" style="padding-right: 5px;"></i>Products</a></li>
                             <li><a href="/orderdisplay"><i class="fa fa-shopping-cart" aria-hidden="true" style="padding-right: 5px;"></i>View Orders</a></li>
                             <li><a href="/adminproducts"><i class="fa fa-id-card-o" aria-hidden="true" style="padding-right: 5px;"></i>Add Product<a></li>
-                            <li><a style="color: white;">login</a></li>
+                            <li><a style="color: white;"></a></li>
                             <sec:authorize access="isAuthenticated()">
                             <li><a href="/logout" 
                                 style="

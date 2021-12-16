@@ -19,7 +19,7 @@
         <hr>
         <div class="payment-failed-body" style="padding-top: 30px; padding-bottom: 30px;">
             <p>Your payment was Successfully Completed</p>
-            <p>You Receive Your Payment Receipt Email Attachment. Thank You for Visiting Us<i class="fa fa-smile-o fa-2x" aria-hidden="true" style="color:yellow; padding-left: 5px; padding-right: 5px;"></i>!!!</p>
+            <p>You Receive Your Payment Receipt Email Attachment. Thank You for Visiting Us<i class="fa fa-smile-o fa-2x" aria-hidden="true" style="color:#f5d222; padding-left: 5px; padding-right: 5px;"></i>!!!</p>
         </div>
         <hr>
         <div class=" payment-failed-footer" style="padding-top: 30px;">

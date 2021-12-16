@@ -220,7 +220,7 @@
                                         </div>
                                         <div class="cart_item_total cart_info_col">
                                             <div class="cart_item_title"><h5>View Products Ordered</h5></div>
-                                            <div class="cart_item_text"><a href="/indorder/${orderdisplaylist.orderid}" style="text-decoration: none;"><i class="fa fa-product-hunt fa-3x" style="color: black;" aria-hidden="true"></i></a></div>
+                                            <div class="cart_item_text" style="text-align: center; margin-top: 10%;"><a href="/indorder/${orderdisplaylist.orderid}" style="text-decoration: none; text-align: center;"><i class="fa fa-product-hunt fa-2x" style="color: blue;" aria-hidden="true"></i></a></div>
                                         </div>
                                     </div>
                                 </li>
