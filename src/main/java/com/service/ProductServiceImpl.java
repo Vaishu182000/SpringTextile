@@ -78,38 +78,6 @@ public class ProductServiceImpl implements ProductService{
 	public void setOrderDAO(OrderRespository orderDAO) {
 		this.orderDAO = orderDAO;
 	}
-	
-	public void service() throws Exception {
-		Products user=new Products();
-		user.setProductid("D1100");
-		user.setPrice(1100);
-		user.setProductname("Shirt");
-		user.setQuantity_aval(15);
-		File file;
-		byte[] bFile;
-		FileInputStream fileInputStream;
-		file = new File("C:\\Users\\VC\\Documents\\workspace-spring-tool-suite-4-4.12.1.RELEASE\\springtextile\\img\\c4.jpg");
-		fileInputStream= new FileInputStream(file);
-		bFile = new byte[(int) file.length()];
-		fileInputStream.read(bFile);
-		String encodstring = org.apache.commons.codec.binary.Base64.encodeBase64String(bFile);
-		System.out.println(encodstring);
-		user.setImage(encodstring);
-		userDAO.save(user);
-		
-		user.setProductid("D1200");
-		user.setPrice(1500);
-		user.setProductname("Shirt");
-		user.setQuantity_aval(15);
-		file = new File("C:\\Users\\VC\\Documents\\workspace-spring-tool-suite-4-4.12.1.RELEASE\\springtextile\\img\\c5.jpg");
-		fileInputStream= new FileInputStream(file);
-		bFile = new byte[(int) file.length()];
-		fileInputStream.read(bFile);
-		encodstring = org.apache.commons.codec.binary.Base64.encodeBase64String(bFile);
-		System.out.println(encodstring);
-		user.setImage(encodstring);
-		userDAO.save(user);
-	}
 	public List<Products> getAllProduct()
 	{
 		return userDAO.findAll();	
