@@ -123,7 +123,7 @@ public class MyController {
 		cartservice.addcart(productid,quantity,userid);
 		List<Products> products = productservice.getAllProduct();
 		model.addAttribute("products", products);
-		return "Products";
+		return "redirect:/products";
 	}
 	
 	@RequestMapping(value="/cart",method=RequestMethod.GET)
@@ -206,7 +206,7 @@ public class MyController {
 				String generatedSecuredPasswordHash = BCrypt.hashpw(pass, BCrypt.gensalt(8));
 				System.out.println(name);
 				int success = userservice.adduser(email,name,generatedSecuredPasswordHash);
-				return "login";
+				return "redirect:/login";
 		    }
 	}
 	
@@ -249,7 +249,7 @@ public class MyController {
 			double total = cartservice.total(userid);
 			model.addAttribute("total",total);
 			model.addAttribute("cart", p1);
-			return "cart";
+			return "redirect:/cart";
 		}
 	    
 	    @RequestMapping(value = "/addorder", method=RequestMethod.GET)
@@ -285,7 +285,7 @@ public class MyController {
 		    	String image = productsmodel.getImage();
 		    	adminservice.insertproductsadmin(productid, productname, productprice, quantityavail, image);
 		    	
-		    	return "adminproducts";
+		    	return "redirect:/adminproducts";
 	    	}	
 	    }
 	    @RequestMapping(value="/adminproductsdisplay",method=RequestMethod.GET)
