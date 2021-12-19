@@ -18,29 +18,6 @@
         list-style: none;
         margin-bottom: 0px
     }
-    .button {
-        display: inline-block;
-        background: red;
-        border-radius: 5px;
-        height: 48px;
-        -webkit-transition: all 200ms ease;
-        -moz-transition: all 200ms ease;
-        -ms-transition: all 200ms ease;
-        -o-transition: all 200ms ease;
-        transition: all 200ms ease
-    }
-    .button a {
-        display: block;
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 48px;
-        color: #FFFFFF;
-        padding-left: 35px;
-        padding-right: 35px
-    }
-    .button:hover {
-        opacity: 0.8
-    }
     .cart_section {
         width: 100%;
         padding-top: 30px;
@@ -51,7 +28,7 @@
         font-weight: 500
     }
     .cart_items {
-        margin-top: 8px
+        margin-top: 15px
     }
     .cart_list {
         border: solid 1px #e8e8e8;
@@ -165,27 +142,23 @@
         cursor: pointer;
         vertical-align: top
     }
-    .icon-input-btn {
-        position: relative;
+    .cart_item_total a{
+        color:blue
     }
-    .fontuser i{
-                position: absolute;
-                left: 15px;
-                color: gray;
-            }
-            .icon-input-btn input[type="submit"]{
-                padding-left: 20px;
-            }
-            .icon-input-btn{
-                position: relative;
-            }
-            .icon-input-btn i{
-                position: absolute;
-                left:0;
-                padding: 9px 8px;
-                color: white;
-                transition: .3s;
-            }
+    .cart_item_total a:hover{
+        color:crimson;
+        font-size: 20px;
+    }
+    button{
+        border: white;
+        background-color: white;
+    }
+    .cart_items{
+        box-shadow: 8px 5px 5px #85edff;
+    }
+    .cart_items:hover{
+        box-shadow: 8px 5px 5px #fa683c;
+    }
     </style>
 <html>
     <body>
@@ -220,7 +193,13 @@
                                         </div>
                                         <div class="cart_item_total cart_info_col">
                                             <div class="cart_item_title"><h5>View Products Ordered</h5></div>
-                                            <div class="cart_item_text" style="text-align: center; margin-top: 10%;"><a href="/indorder/${orderdisplaylist.orderid}" style="text-decoration: none; text-align: center;"><i class="fa fa-product-hunt fa-2x" style="color: blue;" aria-hidden="true"></i></a></div>
+                                            <div class="cart_item_text" style="text-align: center; margin-top: 10%;">
+                                                <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View Products Ordered By the Customer">
+                                                    <a href="/indorder/${orderdisplaylist.orderid}" style="text-decoration: none; text-align: center;">
+                                                        <i class="fa fa-product-hunt fa-2x" aria-hidden="true"></i>
+                                                    </a>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>

@@ -85,6 +85,13 @@ public class UserServiceImpl implements UserServicemain{
 		ud.setPassword(password);
 		ud.setEmail(email);
 		UserDetails u = userdetailsDAO.findUserByEmail(email);
+		if(username.substring(0,5).equals("admin"))
+		{
+			 System.out.println("admin");
+			ud.setClaim("ROLE_ADMIN");
+		}
+		else
+			ud.setClaim("user");
 		if(u == null) {
 		ud = userdetailsDAO.save(ud);
 		System.out.println("success");

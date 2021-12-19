@@ -39,42 +39,49 @@ pageEncoding="ISO-8859-1"%>
            }
    </style>
      <h3 style="text-align: center; padding-top: 20px;">Add A Products To Your Store</h3>
-     <div style="margin-left: 500px;">
-        <form:form action="successinsertion" method="get" enctype="multipart/form-data" modelAttribute = "productsmodel" style="width: 500px;">
-            <label for="exampleInputName" class="form-label">Product ID</label>
-            <div class="input-group mb-3">
-                <span class="input-group-text"><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
-                <form:input type="text" class="form-control" path="productid"/>
-            </div>
-            <form:errors path="productid" cssClass="error"/>
-            <label for="exampleInputName" class="form-label">Product Name</label>
-            <div class="input-group mb-3">
-                <span class="input-group-text"><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
-                <form:input type="text" class="form-control" path="productname"/>
-            </div>
-            <form:errors path="productname" cssClass="error"/>
-            <label for="exampleInputName" class="form-label">Product Price</label>
-            <div class="input-group mb-3">
-                <span class="input-group-text"><i class="fa fa-money" aria-hidden="true"></i></span>
-                <form:input type="text" class="form-control" path="price"/>
-            </div>
-            <form:errors path="price" cssClass="error"/>
-            <label for="exampleInputName" class="form-label">Quantity Available</label>
-            <div class="input-group mb-3">
-                <span class="input-group-text"><i class="fa fa-list-ol" aria-hidden="true"></i></span>
-                <form:input type="text" class="form-control" path="quantity_aval"/>
-            </div>
-            <form:errors path="quantity_aval" cssClass="error"/>
-            <label for="exampleInputName" class="form-label">Product Image</label>
-            <div class="input-group mb-3">
-                <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
-                <form:input type="file" class="form-control" id="myFile" path="image" accept = "image/jpg"/>
-            </div>
-            <form:errors path="image" cssClass="error"/>
-            <div class="icon-input-update">
-                <i class="fa fa-database" aria-hidden="true"></i>
-                <input type="submit" value="Insert Product" class="btn btn-success"/>
-            </div>
-        </form:form>
-    </div>
+     <div class="container">
+         <div class="row" style="margin-left: 100px;">
+             <div class="col-lg-3" style="margin-top: 130px;">
+                <i class="fa fa-database" style="font-size: 250px; padding-left: 20px;" aria-hidden="true"></i>
+             </div>
+             <div class="col-lg-9">
+                <form:form action="successinsertion" method="get" enctype="multipart/form-data" modelAttribute = "productsmodel" style="width: 600px;">
+                    <label for="exampleInputName" class="form-label">Product ID</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
+                        <form:input type="text" class="form-control" path="productid"/>
+                    </div>
+                    <form:errors path="productid" cssClass="error"/>
+                    <label for="exampleInputName" class="form-label">Product Name</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
+                        <form:input type="text" class="form-control" path="productname"/>
+                    </div>
+                    <form:errors path="productname" cssClass="error"/>
+                    <label for="exampleInputName" class="form-label">Product Price</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa fa-money" aria-hidden="true"></i></span>
+                        <form:input type="text" class="form-control" path="price"/>
+                    </div>
+                    <form:errors path="price" cssClass="error"/>
+                    <label for="exampleInputName" class="form-label">Quantity Available</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa fa-list-ol" aria-hidden="true"></i></span>
+                        <form:input type="text" class="form-control" path="quantity_aval"/>
+                    </div>
+                    <form:errors path="quantity_aval" cssClass="error"/>
+                    <label for="exampleInputName" class="form-label">Product Image</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
+                        <form:input type="file" class="form-control" id="myFile" path="image" accept = "image/jpg"/>
+                    </div>
+                    <form:errors path="image" cssClass="error"/>
+                    <div class="icon-input-update">
+                        <i class="fa fa-database" aria-hidden="true"></i>
+                        <input type="submit" value="Insert Product" class="btn btn-success"/>
+                    </div>
+                </form:form>
+             </div>
+         </div>
+     </div>
 </html>

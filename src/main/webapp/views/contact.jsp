@@ -47,7 +47,7 @@
                               <form:errors path="message" cssClass="error"/>
                           </div>
                           <div class="col-lg-12">
-                              <button type="submit" id="form-submit" class="main-dark-button" ><i class="fa fa-paper-plane"></i></button>
+                              <button type="submit" id="form-submit" class="main-dark-button" onclick="alertmessage()"><i class="fa fa-paper-plane"></i></button>
                           </div>
                         </div>
                     </form:form>
@@ -85,4 +85,10 @@
             </div>
         </div>
     </div>
+
+<script>
+    function alertmessage(){
+        alert("Message Sent Successfully");
+    }
+</script>
 <%@include file="footer.jsp" %>

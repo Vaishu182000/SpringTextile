@@ -176,7 +176,7 @@ public class MyController {
 		String state = request.getParameter("state");
 		userservice.addaddress(name,phone,address,district,state,userid);
 		try {
-			Payment payment = service.createPayment((cartservice.total(userid)/100), "USD", "paypal","sale","ethachi",
+			Payment payment = service.createPayment((cartservice.total(userid)), "USD", "paypal","sale","payment",
 					"http://localhost:8080/addaddress/cancel",
 					"http://localhost:8080/addaddress/success");
 			for(Links link:payment.getLinks()) {

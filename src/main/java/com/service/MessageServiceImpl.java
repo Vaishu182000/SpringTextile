@@ -326,41 +326,45 @@ public class MessageServiceImpl implements MessageService{
 	        cell.setCellStyle(style);
 	       
 	       
-	        List<Userorder> userorderl1 = userorderDAO.findAll();
-	        int col = 2;
-	        for(int i=0;i<userorderl1.size();i++)
-	        {
-	        	List<OrderProduct> orderprodl = orderproductDAO.findByUserorderOrderId(userorderl1.get(i).getOrderId());
-	        	double total = 0;
-	        	for(int j = 0;j<orderprodl.size();j++)
-	        	{
-	        		row = spreadsheet.createRow(col);
-	 	    	   	
-	        		cell = row.createCell(0);
-	 	    	  	cell.setCellValue(col);
-	 	    	   	  	  		 	    	  	
-	 	    	   	Optional<Products> productsl = userDAO.findById(orderprodl.get(j).getProduct_id());
-	 	    	   	
-	 	    	   	cell = row.createCell(1);
-	 	    	   	cell.setCellValue(productsl.get().getProductname());
-	 	          
-	 	    	   	cell  =row.createCell(2);
-	 	    	   	cell.setCellValue(orderprodl.get(j).getQuantity());
-	 	    	   	
-	 	    	   	cell = row.createCell(3);
-	 	    	   	cell.setCellValue(orderprodl.get(j).getPrice());
-	 	    	   	
-	 	    	   	total = total + (orderprodl.get(j).getQuantity()) * (orderprodl.get(j).getPrice());
-	 	    	   	col++;
-	        	}
-	        	row = spreadsheet.createRow(col);
-	        	cell = row.createCell(2);
-	        	cell.setCellValue("TOTAL PRICE");
-	        	cell.setCellStyle(style);
-	        	
-	        	cell = row.createCell(3);
-	        	cell.setCellValue(total); 	
-	        }
+	        List<Cart> cart = cartDAO.findByUserdetailsUserId(userid);
+			System.out.println(cart);
+			int col=2;
+			double fulltotal = 0;
+			for(int i=0;i<cart.size();i++)
+			{
+				row = spreadsheet.createRow(col);
+ 	    	   	
+        		cell = row.createCell(0);
+ 	    	  	cell.setCellValue(col-1);
+ 	    	  	
+				String productid = cart.get(i).getProduct_id();
+				Optional<Products> pr = userDAO.findById(productid);
+				double price = pr.get().getPrice();
+				int quantity = cart.get(i).getQuantity();
+				double total = price * quantity;
+				String productname = pr.get().getProductname();
+				fulltotal = fulltotal + total;
+				//String q = String.valueOf(quantity);
+				//String p = String.valueOf(price);
+				
+				cell = row.createCell(1);
+ 	    	   	cell.setCellValue(productname);
+ 	         
+ 	    	   	cell  =row.createCell(2);
+ 	    	   	cell.setCellValue(quantity);
+ 	    	   	
+ 	    	   	cell = row.createCell(3);
+ 	    	   	cell.setCellValue(price);
+ 	    	   	
+ 	    	   	col++;
+			}
+			row = spreadsheet.createRow(col);
+        	cell = row.createCell(2);
+        	cell.setCellValue("TOTAL PRICE");
+        	cell.setCellStyle(style);
+        	
+        	cell = row.createCell(3);
+        	cell.setCellValue(fulltotal);
 	       
 	       FileOutputStream out = new FileOutputStream(new File("order.xlsx"));
 	        workbook.write(out);

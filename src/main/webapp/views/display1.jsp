@@ -65,6 +65,12 @@
         table, th, td{
             border: 1px solid black;
         }
+        .card{
+            box-shadow: 8px 5px 5px #85edff;
+        }
+        .card:hover{
+            box-shadow: 8px 5px 5px #fa683c;
+        }
 </style>
 <body>
     <div class="container">
@@ -109,69 +115,3 @@
                 </c:forEach>
             </div>
         </div>
-                        <!--<div class="item">
-                        <div class="thumb" style="text-align: center;">
-                            <img src="data:image/jpg;base64,${product.image}" style="height:230px; width: 200px;" alt="">
-                        </div>
-                        <div class="down-content">
-                                <h4>Product Name: <c:out value="${product.productname}"/></h4>
-                                <span>Product ID: <c:out value="${product.productid}"/></span>
-                                <span>Rs: <c:out value="${product.price}"/></span>-->
-                                <!--<span>Availability of Product in Store :<c:out value="${product.quantity_aval}"/></span>-->
-                                <!--<span>Quantity Available: <c:out value="${product.quantity_aval}"/></span>
-                                <span>
-                                    <div class="icon-input-update">
-                                        <input type="submit" name="update" value="Update" class="btn btn-warning">
-                                        <i class="fa fa-pencil" aria-hidden="true" style="padding-right: 15px;"></i>
-                                    </div>
-                                </span>
-                                <span>
-                                    <div class="icon-input-btn">
-                                        <input type="submit" name="delete" value="Delete" class="btn btn-danger"/>
-                                        <i class="fa fa-trash" aria-hidden="true" style="padding-right: 15px;"></i>
-                                    </div>
-                                </span>
-                            
-                        </div>
-                    </div>-->
-                
-        
-    <!--<table class="table table-hover" style="width: 700px;">
-        <thead>
-          <tr>
-            <th scope="col">ProductID</th>
-            <th scope="col">Image</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-            <c:forEach items="${products}" var="product">
-                <tr>
-                    <form action="${pageContext.request.contextPath }/updatedelete/${product.productid}" method="get">
-                        <th class="fontset" scope="row"><c:out value="${product.productid}" /></th>
-                        <td class="fontset"><img src="data:image/jpg;base64,${product.image}" width=220px; height=220px/></td>
-                        <td class="fontset"><c:out value="${product.productname}"/></td>
-                        <td class="fontset"><c:out value="${product.price}"/></td>
-                        <td class="fontset"><c:out value="${product.quantity_aval}"/></td>
-                        <td>
-                            <div class="icon-input-update">
-                                <input type="submit" name="update" value="Update" class="btn btn-warning">
-                                <i class="fa fa-pencil" aria-hidden="true" style="padding-right: 15px;"></i>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="icon-input-btn">
-                                <input type="submit" name="delete" value="Delete" class="btn btn-danger"/>
-                                <i class="fa fa-trash" aria-hidden="true" style="padding-right: 15px;"></i>
-                            </div>
-                        </td>
-                    </form>
-                </tr>
-                </tr>
-            </c:forEach>
-        </tbody>
-      </table>-->

@@ -28,6 +28,7 @@ pageEncoding="ISO-8859-1"%>
             color: black;
             transition: .3s;
         }
+        
         label{
             padding-top:15px;
         }
@@ -65,4 +66,13 @@ pageEncoding="ISO-8859-1"%>
             </form>
         </div>
     </c:forEach>
+    <div class="container">
+        <div class="row" style="margin-left: 600px;">
+            <div class="icon-input-delete">
+                <a href="/adminproductsdisplay">
+                    <input type="submit" value="Cancel" class="btn btn-danger">
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
