@@ -11,6 +11,5 @@ import com.model.Products;
 @Component
 @Transactional
 public interface ProductService {
-	public void service() throws Exception;
 	public List<Products> getAllProduct();
 }

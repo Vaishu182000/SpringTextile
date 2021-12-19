@@ -227,7 +227,7 @@ public class MyController {
 	            int userid=Integer.parseInt(session.getAttribute("userid").toString());
 	            System.out.println(payment.toJSON());
 	            if (payment.getState().equals("approved")) {
-	            	messageservice.sendemail(userid,payid);
+	            	//messageservice.sendemail(userid,payid);
 	            	int orderid = orderservice.addorder(userid);
 	            	orderservice. addorderproduct(userid,orderid);
 	                return "success";
