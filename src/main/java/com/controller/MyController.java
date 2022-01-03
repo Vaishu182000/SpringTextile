@@ -30,6 +30,7 @@ import com.service.Indorderdisplay;
 import com.service.MessageService;
 import com.service.OrderService;
 import com.service.Orderdisplay;
+import com.service.Orderdisplayusers;
 import com.service.ProductService;
 
 import com.service.UserServicemain;
@@ -139,7 +140,16 @@ public class MyController {
 		System.out.println(p1);
 		return "cart";
 	}
-
+	
+	@RequestMapping(value="/yourOrders",method=RequestMethod.GET)
+    public String showyourOrders(Model model,HttpSession session)
+    {
+		int userid=Integer.parseInt(session.getAttribute("userid").toString());
+    	List<Orderdisplayusers> orderdisplaylist = orderservice.orderdisplay(userid);
+    	model.addAttribute("orderdisplaylist",orderdisplaylist);
+    	return "YourOrders";	
+    }
+	
 	
 	@RequestMapping(value = "/image", method=RequestMethod.GET)
 	public String showExampleView(Model model)
@@ -363,5 +373,16 @@ public class MyController {
 	    	}
         model.addAttribute("title", "Unknown error");
         return "error";
+	    }
+	    
+	    @RequestMapping(value="/orderdisplay/{orderid}",method=RequestMethod.GET)
+	    public String orderstatus(@PathVariable("orderid") String orderid , Model model)
+	    {
+	    	
+	    	int id = Integer.parseInt(orderid);
+	    	adminservice.updateorder(id);
+	    	List<Orderdisplay> orderdisplaylist = adminservice.orderdisplay();
+	    	model.addAttribute("orderdisplaylist",orderdisplaylist);
+	    	return "orderdisplay";	
 	    }
 }

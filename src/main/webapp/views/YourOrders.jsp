@@ -6,7 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<%@include file="adminheader.jsp" %>
+<%@include file="header.jsp" %>
 <style>
     body {
         font-family: 'Rubik', sans-serif;
@@ -172,7 +172,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12" style="padding-top: 20px; padding-bottom: 20px;">
-                    <h2 style="text-align: center;">Products Ordered Details</h2>
+                    <h2 style="text-align: center;">Products Ordered By You</h2>
                 </div>
             </div>
         </div>
@@ -183,22 +183,26 @@
                                 <li class="cart_item clearfix">
                                     <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                         <div class="cart_item_name cart_info_col">
-                                            <div class="cart_item_title"><h5>Customer Name</h5></div>
-                                            <div class="cart_item_text"><c:out value="${orderdisplaylist.name}"/></div>
+                                            <div class="cart_item_title"><h5>Order Id</h5></div>
+                                            <div class="cart_item_text"><c:out value="${orderdisplaylist.orderid}"/></div>
+                                        </div>
+                                        <div class="cart_item_name cart_info_col">
+                                            <div class="cart_item_title"><h5>Name</h5></div>
+                                            <div class="cart_item_text"><c:out value="${orderdisplaylist.username}"/></div>
                                         </div>
                                         <div class="cart_item_quantity cart_info_col">
                                             <div class="cart_item_title"><h5>Ordered Date</h5></div>
                                             <div class="cart_item_text"><c:out value="${orderdisplaylist.date}"/></div>
                                         </div>
                                         <div class="cart_item_price cart_info_col">
-                                            <div class="cart_item_title"><h5>Price</h5></div>
-                                            <div class="cart_item_text">Rs.<c:out value="${orderdisplaylist.amount}"/></div>
+                                            <div class="cart_item_title"><h5>Total</h5></div>
+                                            <div class="cart_item_text">Rs.<c:out value="${orderdisplaylist.total}"/></div>
                                         </div>
                                         <div class="cart_item_total cart_info_col">
                                             <div class="cart_item_title"><h5>Phone Number</h5></div>
                                             <div class="cart_item_text" ><c:out value="${orderdisplaylist.phoneno}"/></div>
                                         </div>
-                                        <div class="cart_item_total cart_info_col">
+                                        <!--<div class="cart_item_total cart_info_col">
                                             <div class="cart_item_title"><h5>View Products Ordered</h5></div>
                                             <div class="cart_item_text" style="text-align: center; margin-top: 10%;">
                                                 <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View Products Ordered By the Customer">
@@ -207,17 +211,15 @@
                                                     </a>
                                                 </button>
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <div class="cart_item_total cart_info_col">
                                             <div class="cart_item_title"><h5>Status</h5></div>
                                             <div class="cart_item_text" style="padding-top: 18%; margin-top: 0%;">
                                                 <c:if test="${orderdisplaylist.status == 1}">
-                                                    <i class="fa fa-check-square-o fa-2x" style="color: #0d9126"></i>
+                                                    Delivered
                                                 </c:if>
                                                 <c:if test="${orderdisplaylist.status == 0}">
-                                                    <form action="/orderdisplay/${orderdisplaylist.orderid}" method="get">
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fa fa-clock-o" style="padding-right: 5px;" aria-hidden="true"></i>Pending</button>
-                                                    </form>
+                                                    On Process
                                                 </c:if>
                                             </div>
                                         </div>

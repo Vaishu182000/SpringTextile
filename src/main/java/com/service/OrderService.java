@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.context.annotation.ComponentScan;
@@ -12,5 +14,6 @@ public interface OrderService {
 	
 	public int addorder(int userid);
 	public void addorderproduct(int userid, int orderid);
+	public List<Orderdisplayusers> orderdisplay(int userid);
 
 }

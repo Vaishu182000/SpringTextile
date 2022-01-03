@@ -182,32 +182,7 @@ ul {
             color: white;
             transition: .3s;
         }
-       /* .continue input[type="submit"]{
-            padding-left: 25px;
-        }
-        .continue{
-            position: relative;
-        }
-        .continue i{
-            position: absolute;
-            left:0;
-            padding: 9px 8px;
-            color: black;
-            transition: .3s;
-        }*/
 </style>
-
-<!--<div class="page-heading about-page-heading" id="top" style="margin-top: 80px;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="inner-content">
-                    <h2 style="color: white;">Cart</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>-->
 <div class="cart_section">
     <div class="container-fluid">
         <div class="row">
@@ -232,20 +207,11 @@ ul {
                                             <div class="cart_item_title">Price</div>
                                             <div class="cart_item_text">Rs.<c:out value="${cart.price}"/></div>
                                         </div>
-                                        <!--<div class="cart_item_total cart_info_col">
-                                            <div class="cart_item_title">Total</div>
-                                            <div class="cart_item_text" > RS.1000</div>
-                                        </div>-->
                                         <form action="/deletecart/${cart.cartid}" method="GET">
                                             <div class="icon-input-btn">
                                                 <input type="submit" value="Remove" class="btn btn-danger btn-sm"/>
                                                 <i class="fa fa-trash" aria-hidden="true" style="padding-right: 10px;"></i>
                                             </div>
-                                            <!--<div class="text-right">
-                                                <button class="btn btn-white border-secondary bg-white btn-md" style=" border-width: 2px;">
-                                                    <a><i class="fa fa-trash-o"></i></a>
-                                                </button>
-                                            </div>-->
                                         </form>
                                     </div>
                                 </li>

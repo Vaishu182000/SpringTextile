@@ -11,6 +11,7 @@ public class Orderdisplay {
 	private double amount;
 	private String district;
 	private String phoneno;
+	private int status;
 	public int getOrderid() {
 		return orderid;
 	}
@@ -68,6 +69,12 @@ public class Orderdisplay {
 	public String toString() {
 		return "Orderdisplay [orderid=" + orderid + ", name=" + name + ", date=" + date + ", amount=" + amount
 				+ ", district=" + district + ", phoneno=" + phoneno + "]";
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 	

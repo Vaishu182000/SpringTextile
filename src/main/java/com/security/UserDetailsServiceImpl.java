@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException(email);
 		} else {
-			session.setAttribute("userid", user.getUser_id());
+			session.setAttribute("userid", user.getUserId());
 			session.setAttribute("username", user.getUsername());
 		}
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();

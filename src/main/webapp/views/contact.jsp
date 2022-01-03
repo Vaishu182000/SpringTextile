@@ -4,6 +4,39 @@
   .error {
         color: #FF0000;
     }
+    .socialicons .fa{
+        color: black;
+    }
+    .socialicons .fa-facebook:hover{
+        color:#3c87f0;
+    }
+    .socialicons .fa-instagram:hover{
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .socialicons .fa-linkedin:hover{
+        color:#0e76a8;
+    }
+    .socialicons .fa-telegram:hover{
+        color:#e0cfb1;
+    }
+    .fa-envelope{
+        color:#3584f2;
+    }
+    .fa-hourglass{
+        color: #822424;
+    }
+    .fa-map-marker{
+        color:#e03636;
+    }
+    .fa-mobile{
+        color:#6ca5eb;
+    }
+    .fa-shopping-basket{
+        color:#c9b885;
+    }
 </style>
 <div class="page-heading about-page-heading" id="top" style="margin-top: 80px;">
         <div class="container">
@@ -71,11 +104,11 @@
                                 <li style="font-size: 20px;">Work Hours:<br><i class="fa fa-hourglass fa-2x" aria-hidden="true" style="padding-right: 5px;"></i><span style="padding-left: 5px; font-size: 20px;">Mon - Sat : 9am - 7pm<br>Sun : Closed</span></li>
                                 <li style="font-size: 20px;">Email:<br><i class="fa fa-envelope fa-2x" aria-hidden="true" style="padding-right: 5px;"></i><span style="padding-left: 5px; font-size: 20px;">shop@yahoo.in</span></li>
                                 <li style="font-size: 20px; padding-bottom: 10px;">Social Media:<br>
-                                  <div style="padding-left: 5px; padding-top: 5px;">
-                                    <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true" style="color: black;"></i></a>&nbsp;&nbsp;&nbsp;
-                                    <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: black;"></i></a>&nbsp;&nbsp;&nbsp;
-                                    <a href="#"><i class="fa fa-linkedin fa-2x" aria-hidden="true" style="color: black;"></i></a>&nbsp;&nbsp;&nbsp;
-                                    <a href="#"><i class="fa fa-telegram fa-2x" aria-hidden="true" style="color: black;"></i></a>
+                                  <div style="padding-left: 5px; padding-top: 5px;" class="socialicons">
+                                    <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;
+                                    <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;
+                                    <a href="#"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;
+                                    <a href="#"><i class="fa fa-telegram fa-2x" aria-hidden="true"></i></a>
                                   </div>
                                 </li>
                             </ul>

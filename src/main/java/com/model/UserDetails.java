@@ -85,18 +85,14 @@ public class UserDetails implements Cloneable,Serializable,Comparable<UserDetail
 	public void setCartlist(Set<Cart> cartlist) {
 		this.cartlist = cartlist;
 	}
-	public int getUser_id() {
-		return userId;
-	}
+	
 	public Set<Userorder> getOrderlist() {
 		return orderlist;
 	}
 	public void setOrderlist(Set<Userorder> orderlist) {
 		this.orderlist = orderlist;
 	}
-	public void setUser_id(int user_id) {
-		this.userId = user_id;
-	}
+	
 	public String getUsername() {
 		return username;
 	}

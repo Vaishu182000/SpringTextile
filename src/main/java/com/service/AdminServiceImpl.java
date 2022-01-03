@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ import com.model.Products;
 import com.model.UserDetails;
 import com.model.Userorder;
 @Service
+@Transactional
 public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
@@ -130,9 +133,9 @@ public class AdminServiceImpl implements AdminService{
 			od.setDate(userorder.get(i).getOrder_date());
 			od.setAmount(userorder.get(i).getTotal_price());
 			od.setOrderid(userorder.get(i).getOrderId());
-			
+			od.setStatus(userorder.get(i).getStatus());
 			UserDetails user = userorder.get(i).getAuth();
-			int uid = user.getUser_id();
+			int uid = user.getUserId();
 			
 			od.setName(user.getUsername());
 			
@@ -178,4 +181,8 @@ public class AdminServiceImpl implements AdminService{
 		}
 		return indorderdisplay;
 	}
+	public void updateorder(int orderid) {
+			
+			userorderDAO.updatestatus(1, orderid);
+		}
 }

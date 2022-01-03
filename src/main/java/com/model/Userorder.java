@@ -25,6 +25,7 @@ public class Userorder implements Cloneable,Serializable,Comparable<Userorder>{
 	private double totalprice;
 	@ManyToOne()
 	private UserDetails userdetails;
+	private int status;
 	
 	@OneToMany(targetEntity = OrderProduct.class, mappedBy="orderproductid",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<OrderProduct> orderproducts;
@@ -92,6 +93,14 @@ public class Userorder implements Cloneable,Serializable,Comparable<Userorder>{
 		return Double.doubleToLongBits(totalprice) == Double.doubleToLongBits(other.totalprice)
 				&& Objects.equals(userdetails, other.userdetails) && Objects.equals(orderdate, other.orderdate)
 				&& orderId == other.orderId && Objects.equals(orderproducts, other.orderproducts);
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 	

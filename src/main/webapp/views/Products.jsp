@@ -49,7 +49,7 @@
                                     <!--<span>Availability of Product in Store :<c:out value="${product.quantity_aval}"/></span>-->
                                     <div class="quantity-content">
                                         <div class="left-content">
-                                            <h6>No. of Orders</h6>
+                                            <h6>Quantity</h6>
                                         </div>
                                         <div class="right-content">
                                             <div class="quantity buttons_added">

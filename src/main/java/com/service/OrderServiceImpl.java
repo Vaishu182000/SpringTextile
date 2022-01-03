@@ -177,4 +177,32 @@ public class OrderServiceImpl implements OrderService {
 		int orderid = order.getOrderId();
 		return orderid;
 	}
+	
+	@Override
+	public List<Orderdisplayusers> orderdisplay(int userid) {
+		// TODO Auto-generated method stub
+		List<Userorder> userorderlist = userorderDAO.findByUserdetailsUserId(userid);
+		Optional<UserDetails> user = userdetailsDAO.findById(userid);
+		String username = user.get().getUsername();
+		List<Orderdisplayusers> orders = new ArrayList<>();
+		for(int i=0;i<userorderlist.size();i++) {
+			Orderdisplayusers od = new Orderdisplayusers();
+			od.setOrderid(userorderlist.get(i).getOrderId());
+			od.setDate(userorderlist.get(i).getOrder_date());
+			od.setTotal(userorderlist.get(i).getTotal_price());
+			od.setOrderid(userorderlist.get(i).getOrderId());
+			od.setUsername(username);
+			List<Address> add = addressdao.findByUserdetailsUserId(userid);
+			for(int j=0;j<add.size();j++) {
+			od.setPhoneno(add.get(j).getPhonenumber());
+			}
+			if(userorderlist.get(i).getStatus() == 1)
+				od.setStatus(1);
+			else
+				od.setStatus(0);
+			orders.add(od);
+		}
+		return orders;
+		
+	}
 }

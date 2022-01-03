@@ -66,7 +66,7 @@
             border: 1px solid black;
         }
         .card{
-            box-shadow: 8px 5px 5px #85edff;
+            box-shadow: 8px 5px 5px #d4d9d6;
         }
         .card:hover{
             box-shadow: 8px 5px 5px #fa683c;
@@ -90,23 +90,23 @@
                                 <img src="data:image/jpg;base64,${product.image}" style="width: 150px; height: 150px;" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
-                              <h3 class="card-title"><c:out value="${product.productname}"/></h3>
+                              <h3 class="card-title" style="text-align: center;"><c:out value="${product.productname}"/></h3>
                               <div style="padding-top: 10px; padding-bottom: 10px;">
                                 <h6 class="card-text"><i class="fa fa-product-hunt" aria-hidden="true" style="padding-right: 5px;"></i>Product ID : <c:out value="${product.productid}"/></h6>
                                 <h6 class="card-text"><i class="fa fa-money" aria-hidden="true" style="padding-right: 5px;"></i>Price : <c:out value="${product.price}"/></h6>
                                 <h6 class="card-text"><i class="fa fa-list-ol" aria-hidden="true" style="padding-right: 5px;"></i>Quantity : <c:out value="${product.quantity_aval}"/></h6>
                               </div>
-                              <div style="display: inline-flex;">
-                              <div class="icon-input-update">
-                                <input type="submit" name="update" value="Update" class="btn btn-warning">
-                                <i class="fa fa-pencil" aria-hidden="true" style="padding-right: 15px;"></i>
-                              </div>
-                              <div style="padding-left:20px">
-                              <div class="icon-input-btn">
-                                <input type="submit" name="delete" value="Delete" class="btn btn-danger"/>
-                                <i class="fa fa-trash" aria-hidden="true" style="padding-right: 15px;"></i>
-                              </div>
-                            </div>
+                              <div style="display: inline-flex; padding-top: 10px;">
+                                <div class="icon-input-update">
+                                    <input type="submit" name="update" value="Update" class="btn btn-warning">
+                                    <i class="fa fa-pencil" aria-hidden="true" style="padding-right: 15px;"></i>
+                                </div>
+                                <div style="padding-left:35px">
+                                <div class="icon-input-btn">
+                                    <input type="submit" name="delete" value="Delete" class="btn btn-danger"/>
+                                    <i class="fa fa-trash" aria-hidden="true" style="padding-right: 15px;"></i>
+                                </div>
+                                </div>
                             </div>
                             </div>
                           </div>

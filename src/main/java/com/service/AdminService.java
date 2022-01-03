@@ -17,4 +17,5 @@ public interface AdminService {
 	public List<Userorder> userorder();
 	public List<Orderdisplay> orderdisplay();
 	public List<Indorderdisplay> indorder(int orderid);
+	public void updateorder(int id);
 }
