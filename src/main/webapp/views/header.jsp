@@ -17,6 +17,7 @@
                             <li class="scroll-to-section"><a href="/home" class="active"><i class="fa fa-home" aria-hidden="true" style="padding-right: 5px;"></i>Home</a></li>
                             <li><a href="/products"><i class="fa fa-product-hunt" aria-hidden="true" style="padding-right: 5px;"></i>Products</a></li>
                             <li><a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true" style="padding-right: 5px;"></i>Cart</a></li>
+                            <li><a href="/yourOrders"><i class="fa fa-shopping-bag" aria-hidden="true" style="padding-right: 5px;"></i>Your Orders</a></li>
                             <li><a href="/about"><i class="fa fa-id-card-o" aria-hidden="true" style="padding-right: 5px;"></i>About Us</a></li>
                             <li><a href="/contact"><i class="fa fa-phone-square" aria-hidden="true" style="padding-right: 5px;"></i>Contact Us</a></li>
                             <li><a href="/adminproductsdisplay"><i class="fa fa-lock" aria-hidden="true" style="padding-right: 5px;"></i>Admin</a></li>

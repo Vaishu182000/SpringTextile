@@ -172,7 +172,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12" style="padding-top: 20px; padding-bottom: 20px;">
-                    <h2 style="text-align: center;">Products Ordered By You</h2>
+                    <h2 style="text-align: center;">Order History</h2>
                 </div>
             </div>
         </div>

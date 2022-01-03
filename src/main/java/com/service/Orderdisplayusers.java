@@ -39,11 +39,7 @@ public class Orderdisplayusers {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	@Override
-	public String toString() {
-		return "Orderdisplayusers [orderid=" + orderid + ", date=" + date + ", total=" + total + ", phoneno=" + phoneno
-				+ ", status=" + status + "]";
-	}
+	
 	public String getUsername() {
 		return username;
 	}
