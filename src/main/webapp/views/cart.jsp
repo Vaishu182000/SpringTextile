@@ -161,9 +161,36 @@ ul {
     cursor: pointer;
     vertical-align: top
 }
+.shopping {
+    display: inline-block;
+    border: none;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 48px;
+    color: #FFFFFF;
+    padding-left: 35px;
+    padding-right: 35px;
+    outline: none;
+    cursor: pointer;
+    background: red;
+    
+}
+.empty-cart h3{
+    font-weight:bolder;
+    
+}
+.empty-cart p{
+    text-decoration: gray;
+}
 .icon-input-btn {
     position: relative;
 }
+.empty-cart{
+    margin: auto;
+    width: 30%;
+    padding: 10px;
+}
+
 .fontuser i{
             position: absolute;
             left: 15px;
@@ -189,7 +216,16 @@ ul {
             <div class="col-lg-10 offset-lg-1">
                 <div class="cart_container">
                     <div class="cart_title">Your Shopping Cart <i class="fa fa-cart-arrow-down fa-2x" style="margin-left: 5px;" aria-hidden="true"></i></div>
-                    <c:forEach items="${cart}" var="cart">
+                    <c:if test="${empty cart}">
+                        <div class="empty-cart">
+                            <img src="/assets/images/cart.jpg"/>
+                        <h3>Hey, it feels so light!</h3>
+                        <p>There is nothing in your bag.Let's add some clothing</p>
+                            <a href="/products"><button type="button" class="shopping">Continue Shopping</button></a>
+                        </div>
+                    </c:if>
+                    <c:if test="${not empty cart}">
+                        <c:forEach items="${cart}" var="cart">
                         <div class="cart_items">
                             <ul class="cart_list">
                                 <li class="cart_item clearfix">
@@ -300,13 +336,14 @@ ul {
                     <div class="cart_buttons"> 
                             <!--<i class="fa fa-cart-plus" aria-hidden="true"></i>-->
                             <a href="/products"><button type="button" class="button cart_button_clear">Continue Shopping</button></a> 
-                        <c:if test="${empty address}">
-                            <button type="button" class="button cart_button_checkout" data-bs-toggle="modal" data-bs-target="#exampleModal">Place Order</button> 
-                        </c:if>
-                        <c:if test="${not empty address}">
-                            <button type="button" class="button cart_button_checkout" data-bs-toggle="modal" data-bs-target="#addressModal">Place Order</button> 
-                        </c:if>
+                            <c:if test="${empty address}">
+                                <button type="button" class="button cart_button_checkout" data-bs-toggle="modal" data-bs-target="#exampleModal">Place Order</button> 
+                            </c:if>
+                            <c:if test="${not empty address}">
+                                <button type="button" class="button cart_button_checkout" data-bs-toggle="modal" data-bs-target="#addressModal">Place Order</button> 
+                            </c:if>
                     </div>
+                    </c:if>
                 </div>
             </div>
         </div>

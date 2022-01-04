@@ -46,4 +46,10 @@ public class Orderdisplayusers {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	@Override
+	public String toString() {
+		return "Orderdisplayusers [username=" + username + ", orderid=" + orderid + ", date=" + date + ", total="
+				+ total + ", phoneno=" + phoneno + ", status=" + status + "]";
+	}
+	
 }

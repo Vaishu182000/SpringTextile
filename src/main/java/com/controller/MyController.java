@@ -355,6 +355,14 @@ public class MyController {
 	    	return "indorder";
 	    }
 	    
+	    @RequestMapping(value="/indorderuser/{orderid}",method=RequestMethod.GET)
+	    public String indorderuser(@PathVariable("orderid") int orderid,Model model)
+	    {
+	    	List<Indorderdisplay> indorderdisplay = orderservice.indorder(orderid);
+	    	model.addAttribute("indorderdisplay",indorderdisplay);
+	    	return "indorderuser";
+	    }
+	    
 	    public void showorder(Model model) {
 	    	List<Orderdisplay> order = adminservice.orderdisplay();
 			model.addAttribute("products", order);

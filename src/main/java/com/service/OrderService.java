@@ -15,5 +15,5 @@ public interface OrderService {
 	public int addorder(int userid);
 	public void addorderproduct(int userid, int orderid);
 	public List<Orderdisplayusers> orderdisplay(int userid);
-
+	public List<Indorderdisplay> indorder(int orderid);
 }

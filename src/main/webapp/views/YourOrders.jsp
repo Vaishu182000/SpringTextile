@@ -166,6 +166,32 @@
     .btn-outline-danger:hover {
         color:white;
     }
+.empty-cart{
+    margin: auto;
+    width: 25%;
+    padding: 10px;
+}
+.shopping {
+    display: inline-block;
+    border: none;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 48px;
+    color: #FFFFFF;
+    padding-left: 35px;
+    padding-right: 35px;
+    outline: none;
+    cursor: pointer;
+    background: red;
+
+}
+.empty-cart h3{
+    font-weight:bolder;
+
+}
+.empty-cart p{
+    text-decoration: gray;
+}
     </style>
 <html>
     <body>
@@ -177,6 +203,14 @@
             </div>
         </div>
         <div class="container">
+            <c:if test="${empty orderdisplaylist}">
+                <div class="empty-cart">
+                    <img src="/assets/images/orders.jpg" width="260px" height="261px"/>
+                <h3>No Orders Yet!</h3>
+                <p>Let's go Order something!</p>
+                    <a href="/products"><button type="button" class="shopping">Continue Shopping</button></a>
+                </div>
+            </c:if>
         <c:forEach items="${orderdisplaylist}" var="orderdisplaylist">
                         <div class="cart_items">
                             <ul class="cart_list">
@@ -184,7 +218,13 @@
                                     <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                         <div class="cart_item_name cart_info_col">
                                             <div class="cart_item_title"><h5>Order Id</h5></div>
-                                            <div class="cart_item_text"><c:out value="${orderdisplaylist.orderid}"/></div>
+                                            <div class="cart_item_text">
+                                                <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View Products Ordered By You">
+                                                    <a href="/indorderuser/${orderdisplaylist.orderid}" style="text-decoration: none; text-align: center;">
+                                                        <c:out value="${orderdisplaylist.orderid}"/>
+                                                    </a>
+                                                </button>
+                                            </div>
                                         </div>
                                         <div class="cart_item_name cart_info_col">
                                             <div class="cart_item_title"><h5>Name</h5></div>

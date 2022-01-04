@@ -205,4 +205,29 @@ public class OrderServiceImpl implements OrderService {
 		return orders;
 		
 	}
+	@Override
+	public List<Indorderdisplay> indorder(int orderid) {
+		List<OrderProduct> orderproductlist = orderproductDAO.findByUserorderOrderId(orderid);
+		List<Indorderdisplay> indorderdisplay = new ArrayList<>();
+		for(int i=0;i<orderproductlist.size();i++)
+		{
+			Indorderdisplay indorderd = new Indorderdisplay();
+			String productid = orderproductlist.get(i).getProduct_id();
+			System.out.println(productid);
+			indorderd.setProductid(productid);
+			indorderd.setPrice(orderproductlist.get(i).getPrice());
+			indorderd.setQuantity(orderproductlist.get(i).getQuantity());
+			List<Products> productslist = userDAO.findByproductid(productid);
+			for(int j=0;j<productslist.size();j++)
+			{
+				indorderd.setProductname(productslist.get(j).getProductname());
+				System.out.println(productslist.get(j).getProductname());
+				indorderd.setImage(productslist.get(j).getImage());
+				
+			}
+			indorderdisplay.add(indorderd);
+		}
+		return indorderdisplay;
+	}
+	
 }

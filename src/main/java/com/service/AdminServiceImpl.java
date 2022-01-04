@@ -98,7 +98,7 @@ public class AdminServiceImpl implements AdminService{
 		products.setQuantity_aval(quantityavail);
 		byte[] bFile;
 		FileInputStream fileInputStream;
-		File file = new File("C:\\Users\\VC\\Documents\\workspace-spring-tool-suite-4-4.12.1.RELEASE\\springtextile\\img\\"+image);
+		File file = new File("C:\\Users\\VC\\SpringTextile\\img\\"+image);
 		fileInputStream= new FileInputStream(file);
 		bFile = new byte[(int) file.length()];
 		fileInputStream.read(bFile);
